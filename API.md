@@ -9,7 +9,6 @@
 |  username_exist   |              用户名已被使用              | 注册、更改用户名 |
 | username_notexist |               用户名不存在               |       登陆       |
 |  password_error   |                 密码错误                 |       登陆       |
-|     no_title      |                  无标题                  |     发布文本     |
 |     not_login     |                  未登录                  | 点赞、取消点赞、增加文本内容  |
 |      bad_req      | 错误的请求信息，代表请求json文件格式有误 | 所有POST类型API  |
 
@@ -477,7 +476,6 @@ POST /api/content/text
 
 | 参数名      | 类型   | 描述          |
 | ----------- | ------ | ------------- |
-| title       | string | 标题          |
 | detail      | string | 正文          |
 | tags        | array  | 标签          |
 | isPublic    | bool   | 是否公开      |
@@ -488,7 +486,6 @@ POST /api/content/text
 
 ```json
 {
-	"title": "标题",
 	"detail": "这是一个正文",
     "tags":[
         "标签"
@@ -505,7 +502,7 @@ POST /api/content/text
 
 | 参数名 |  类型  | 描述 |           参数           |
 | :----: | :----: | :--: | :----------------------: |
-| State  | string | 状态 | success,no_title,not_login,bad_req |
+| State  | string | 状态 | success,not_login,bad_req |
 |  Data  | string | 数据 |           暂无           |
 
 * 参数使用json形式解析
