@@ -9,7 +9,11 @@
 |  username_exist   |              用户名已被使用              | 注册、更改用户名 |
 | username_notexist |               用户名不存在               |       登陆       |
 |  password_error   |                 密码错误                 |       登陆       |
-|     not_login     |                  未登录                  | 点赞、取消点赞、增加文本内容  |
+|     not_login     |                  未登录                  | 获取用户信息、点赞、取消点赞、增加文本内容  |
+|     no_this_id    |              请求的id不存在              | 获取用户信息     |
+|     name_nil      |              空用户名              | 用户注册 |
+|     email_nil     |              空邮箱              | 用户注册 |
+|     email_format_error    |            错误的邮箱格式              | 用户注册 |
 |      bad_req      | 错误的请求信息，代表请求json文件格式有误 | 所有POST类型API  |
 
 - 注意：所有GET类型默认返回success状态，错误将在http状态码中体现
@@ -208,26 +212,26 @@ GET /api/user/info/{userID:string}
 > Status: 200 OK
 >
 > Location: /api/user/info/self
-
-| 参数名      | 类型   | 描述          |
-| :---------: | :----: | :-----------: |
-| ID          | string | 用户ID        |
-|    Email    |   string   |     邮箱      |
-|    Name     |   string   |    用户名     |
-|    Info     | dictionary |   用户信息    |
-|  Info.Name  |   string   |    用户名     |
-| Info.Aavtar |   string   |    头像URL    |
-|  Info.Bio   |   string   |   个人简介    |
-| Info.Gender |    number    | 性别(0为男生) |
+> 
+| 参数名 |  类型  | 描述 |              状态              |
+| :----: | :----: | :--: | :----------------------------: |
+| State  | string | 状态 | success,not_login,bad_req,no_this_id |
+|     ID      |   string   |    用户ID     |              暂无              |
+|    Email    |   string   |     邮箱      |              暂无              |
+|    Info     | dictionary |   用户信息    |              暂无              |
+|  Info.Name  |   string   |    用户名     |              暂无              |
+| Info.Aavtar |   string   |    头像URL    |              暂无              |
+|  Info.Bio   |   string   |   个人简介    |              暂无              |
+| Info.Gender |   number   | 性别(0为男生) |              暂无              |
 
 * 参数使用json形式解析
 
 ##### Example
 ```json
 {
-    "ID": "5fbcb442f5beb22628d4b685",
+  "State":"success",
+  "ID": "5fbcb442f5beb22628d4b685",
 	"Email": "lijia@sysu.edu.cn",
-	"Name": "lijia",
 	"Info" :{
         "Name": "lijia",
         "Avatar": "",
