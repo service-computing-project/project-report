@@ -352,7 +352,7 @@ GET /api/public
 
 > Status: 200 OK
 >
-> Location: /api/content/detail/5c3774187a2bdd000111e10c
+> Location: /api/public
 
 | 参数名      | 类型   | 描述          |
 | ----------- | ------ | ------------- |
@@ -427,7 +427,7 @@ GET /api/content/texts/{userID:string}
 
 > Status: 200 OK
 >
-> Location: /api/content/detail/5c3774187a2bdd000111e10c
+> Location: /api/content/texts/5c3774187a2bdd000111e10c
 
 | 参数名      | 类型   | 描述          |
 | ----------- | ------ | ------------- |
@@ -511,14 +511,15 @@ POST /api/content/text
 ## Like
 ### 获取用户点赞列表
 ```
-GET /api/like
+GET /api/like/{contentID}
 ```
+* contentID string 内容id
 
 #### Response
 
 > Status: 200 OK
 >
-> Location: /api/notification/all
+> Location: /api/like/5c3765bd7a2bdd000111e107
 
 |  参数名  |  类型  |   描述   |
 | :------: | :----: | :------: |
@@ -555,7 +556,7 @@ POST /api/like/{contentID}
 
 > Status: 202 Accepted
 >
-> Location: /like/5c3765bd7a2bdd000111e107
+> Location: /api/like/5c3765bd7a2bdd000111e107
 
 | 参数名 |  类型  | 描述 |       参数       |
 | :----: | :----: | :--: | :--------------: |
@@ -589,7 +590,7 @@ PATCH /api/like/{contentID}
 
 > Status: 204 No Content
 >
-> Location: /like/5c3765bd7a2bdd000111e107
+> Location: /api/like/5c3765bd7a2bdd000111e107
 
 | 参数名 |  类型  | 描述 |       参数       |
 | :----: | :----: | :--: | :--------------: |
