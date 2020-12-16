@@ -10,6 +10,9 @@
 | username_notexist |               用户名不存在               |       登陆       |
 |  password_error   |                 密码错误                 |       登陆       |
 |     not_login     |                  未登录                  | 获取用户信息、点赞、取消点赞、增加文本内容  |
+|     like_exist    |              已经对该对象点赞过了        | 点赞     |
+|   like_not_exist  |              不能取消没有的点赞          | 取消点赞     |
+|  no_this_content  |              点赞、取消点赞的对象不存在  | 点赞、取消点赞、获取点赞列表     |
 |     no_this_id    |              请求的id不存在              | 获取用户信息     |
 |     name_nil      |              空用户名              | 用户注册 |
 |     email_nil     |              空邮箱              | 用户注册 |
@@ -521,11 +524,11 @@ GET /api/like/{contentID}
 >
 > Location: /api/like/5c3765bd7a2bdd000111e107
 
-|  参数名  |  类型  |   描述   |
-| :------: | :----: | :------: |
-|  State   | string |   状态   |
-|   Data   | array  | 点赞列表 |
-| DataItem | string |  用户名  |
+|  参数名  |  类型  |   描述   |       参数       |
+| :------: | :----: | :------: | :--------------: |
+|  State   | string |   状态   |success,no_this_content|
+|   Data   | array  | 点赞列表 |       暂无       |
+| DataItem | string |  用户名  |       暂无       |
 
 
 * 参数使用json形式解析
@@ -560,7 +563,7 @@ POST /api/like/{contentID}
 
 | 参数名 |  类型  | 描述 |       参数       |
 | :----: | :----: | :--: | :--------------: |
-| State  | string | 状态 | success, not_login,bad_req |
+| State  | string | 状态 | success, not_login,like_exist,bad_req |
 |  Data  | string | 数据 |       暂无       |
 
 * 参数使用json形式解析
@@ -594,7 +597,7 @@ PATCH /api/like/{contentID}
 
 | 参数名 |  类型  | 描述 |       参数       |
 | :----: | :----: | :--: | :--------------: |
-| State  | string | 状态 | success,not_login, bad_req |
+| State  | string | 状态 | success,not_login,like_not_exist, bad_req |
 |  Data  | string | 数据 |       暂无       |
 
 * 参数使用json形式解析
