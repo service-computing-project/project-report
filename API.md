@@ -345,20 +345,8 @@ DELETE /api/content/{contentID:string}
 ### 获取公共内容
 
 ```
-GET /api/content/detail/{contentID:string}
+GET /api/public
 ```
-
-* contentID string 内容id
-
-#### Parameters
-| 参数名      | 类型   | 描述          |
-| ----------- | ------ | ------------- |
-| page        | number | 页面状态      |
-| eachPage    | number | 每页数量      |
-
-##### Example
-
-空
 
 #### Response
 
@@ -423,7 +411,7 @@ GET /api/content/detail/{contentID:string}
 ### 获取指定用户的所有内容
 
 ```
-GET /api/content/detail/{userID:string}
+GET /api/content/texts/{userID:string}
 ```
 
 * userID string 用户id(user_id="self"时，获取自身信息)
