@@ -17,6 +17,8 @@
 |     name_nil      |              空用户名              | 用户注册 |
 |     email_nil     |              空邮箱              | 用户注册 |
 |     email_format_error    |            错误的邮箱格式              | 用户注册 |
+| user_content_id_not_matching  |        更新的内容不是本用户发布的             |     更新内容    |
+
 |      bad_req      | 错误的请求信息，代表请求json文件格式有误 | 所有POST类型API  |
 
 - 注意：所有GET类型默认返回success状态，错误将在http状态码中体现
@@ -156,7 +158,7 @@ POST /api/user/logout
 ```
 POST /api/user/name
 ```
-
+* Token required
 #### Request
 
 | 参数名      | 类型   | 描述          |
@@ -458,6 +460,57 @@ GET /api/content/texts/{userID:string}
    ]
   }
  ]
+}
+```
+
+### 更新文本内容
+
+```
+POST /api/content/update
+```
+
+#### Request
+
+| 参数名      | 类型   | 描述          |
+| ----------- | ------ | ------------- |
+| contentID   | string | 内容ID        |
+| detail      | string | 正文          |
+| tags        | array  | 标签          |
+| isPublic    | bool   | 是否公开      |
+
+* 参数使用json形式提交
+
+##### Example
+
+```json
+{
+    "contentID":"5fda52e2619fcb15076f9b0c",
+	  "detail": "这是一个正文",
+    "tags":[
+        "标签"
+    ],
+    "isPublic": true
+}
+```
+
+#### Response
+
+> Status: 201 Created
+>
+> Location: /api/content/update
+
+| 参数名 |  类型  | 描述 |           参数           |
+| :----: | :----: | :--: | :----------------------: |
+| State  | string | 状态 | success,not_login,bad_req,user_content_id_not_matching |
+|  Data  | string | 数据 |           暂无           |
+
+* 参数使用json形式解析
+
+##### Example
+```json
+{
+	"State": "success",
+	"Data": ""
 }
 ```
 
