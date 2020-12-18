@@ -636,6 +636,7 @@ GET /api/notification/all
 | NotificationItem.Data.Content | string | 通知内容 |
 | NotificationItem.Data.SourceID | string | 来源用户ID |
 | NotificationItem.Data.TargetID | string | 通知用户ID |
+| NotificationItem.Data.ContentID | string | 点赞文章ID |
 | NotificationItem.Data.Type | string | 通知类型 |
 
 
@@ -653,6 +654,7 @@ GET /api/notification/all
     "Content": "",
     "SourceID": "5b3510fe7a2bdd4aac29eb73",
     "TargetID": "5b3510fe7a2bdd4aac29eb73",
+    "ContentID": "5fda52e2619fcb15076f9b0c",
     "Type": "like"
    },
    "User": {
@@ -668,6 +670,7 @@ GET /api/notification/all
     "Content": "",
     "SourceID": "5b3510fe7a2bdd4aac29eb73",
     "TargetID": "5b3510fe7a2bdd4aac29eb73",
+    "ContentID": "5fda52e2619fcb15076f9b0c",
     "Type": "like"
    },
    "User": {
