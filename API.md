@@ -104,7 +104,7 @@ POST /api/user/login
 | 参数名 |  类型  | 描述 |                       参数                        |
 | :----: | :----: | :--: | :-----------------------------------------------: |
 | State  | string | 状态 | success, username_notexist,password_error,bad_req |
-|  Data  | string | 数据 |                       暂无                        |
+|  Data  | string | 令牌 |                       暂无                        |
 
 * 参数使用json形式解析
 
@@ -112,7 +112,7 @@ POST /api/user/login
 ```json
 {
 	"State": "success",
-  "Data":""
+  "Data":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MDg0NTE0OTAsIm5hbWUiOiJzdW5oYW9uYW4iLCJwYXNzd29yZCI6IjEyMzQ1NiJ9.XfEv5awYf7sw6b6wrgiiz691MKGx-sCYKY1FwgaKemQ"
 }
 ```
 
