@@ -353,6 +353,16 @@ DELETE /api/content/{contentID:string}
 GET /api/content/public
 ```
 
+#### Parameters
+
+| 字段     | 类型   | 描述   |
+| -------- | ------ | ------ |
+| page     | number | 页码   |
+| per_page | number | 页大小 |
+
+##### Example
+
+
 #### Response
 
 > Status: 200 OK
@@ -420,13 +430,16 @@ GET /api/content/texts/{userID:string}
 ```
 
 * userID string 用户id(user_id="self"时，获取自身信息)
-#### Request
 
-空
+#### Parameters
+
+| 字段     | 类型   | 描述   |
+| -------- | ------ | ------ |
+| page     | number | 页码   |
+| per_page | number | 页大小 |
 
 ##### Example
 
-空
 
 #### Response
 
@@ -670,6 +683,15 @@ PATCH /api/like/{contentID}
 ```
 GET /api/notification/all
 ```
+
+#### Parameters
+
+| 字段     | 类型   | 描述   |
+| -------- | ------ | ------ |
+| page     | number | 页码   |
+| per_page | number | 页大小 |
+
+##### Example
 
 #### Response
 
