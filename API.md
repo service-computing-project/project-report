@@ -18,7 +18,6 @@
 |     email_nil     |              空邮箱              | 用户注册 |
 |     email_format_error    |            错误的邮箱格式              | 用户注册 |
 | user_content_id_not_matching  |        更新的内容不是本用户发布的             |     更新内容    |
-
 |      bad_req      | 错误的请求信息，代表请求json文件格式有误 | 所有POST类型API  |
 
 - 注意：所有GET类型默认返回success状态，错误将在http状态码中体现
