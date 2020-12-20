@@ -350,14 +350,14 @@ DELETE /api/content/{contentID:string}
 ### 获取公共内容
 
 ```
-GET /api/public
+GET /api/content/public
 ```
 
 #### Response
 
 > Status: 200 OK
 >
-> Location: /api/public
+> Location: /api/content/public
 
 | 参数名      | 类型   | 描述          |
 | ----------- | ------ | ------------- |
