@@ -366,7 +366,7 @@ GET /api/content/public
 
 > Status: 200 OK
 >
-> Location: /api/content/public
+> Location: /api/content/public?page=1&per_page=2
 
 | 参数名      | 类型   | 描述          |
 | ----------- | ------ | ------------- |
@@ -444,7 +444,7 @@ GET /api/content/texts/{userID:string}
 
 > Status: 200 OK
 >
-> Location: /api/content/texts/5c3774187a2bdd000111e10c
+> Location: /api/content/texts/5c3774187a2bdd000111e10c?page=1&per_page=1
 
 | 参数名      | 类型   | 描述          |
 | ----------- | ------ | ------------- |
