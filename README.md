@@ -62,6 +62,7 @@ XBlog
 > npm install --registry="https://registry.npm.taobao.org"
 > npm start
 ```
+**注**：由于nodejs依赖包远程库可能有动态更新，若遇运行缺少依赖而运行错误，请尝试``npm install --registry="https://registry.npm.vmatrix.org.cn"``。
 
 ### 后端
 
