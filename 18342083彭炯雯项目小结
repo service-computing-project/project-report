@@ -1,0 +1,123 @@
+# 个人报告
+
+| **姓名** | **彭炯雯**   |
+| -------- | ------------ |
+| **学号** | **18342083** |
+| **年级** | **2018级**   |
+| **专业** | **软件工程** |
+
+## 个人工作
+
+- 完成前端项目结构设计
+- 完成登录/注册模块，并联合后端实现``token``认证
+- 完成导航栏模块
+- 完成个人主页模块
+- 完成反向代理配置，解决跨域请求
+- 撰写实验报告
+- 项目logo设计
+
+### 前端结构设计
+
+前端框架使用``Angular 10``，该框架支持模板与组件的结构设计思想，因此设计如下：
+![](https://cdn.jsdelivr.net/gh/sherryjw/StaticResource@master/image/sc-hw9-002.png)
+- _service: 存放共享服务，现仅包含拦截器
+- content: 博客详情页
+- error: 错误页
+- home: 广场页
+- login: 登录页
+- nav-bar: 导航栏
+- new-content-editor-button: 共享编辑按钮
+- register: 注册页
+- user: 用户个人信息主页
+- 其他: 包括路由配置等
+
+### 登录/注册
+
+登录注册在UI层面无特殊设计，重点在于成功提交表单的同时**存储服务器返回的token以及允许cookie请求**，使用一个拦截器可以实现客户端请求的再处理，结合``localStorage``记录用户登录状态、存储``token``：
+
+``auth.interceptor.ts``
+```js
+intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  let key = localStorage.getItem('currentUser');
+  if (key) {  //如果当前存着token
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    req = req.clone({
+      withCredentials: true,
+      setHeaders: {
+        Authorization: `${currentUser.Data}`
+      }
+    });
+  }
+  else {      //如果当前不是登录状态
+    req = req.clone({
+    withCredentials: true
+    });
+  }
+  return next.handle(req);
+}
+```
+
+
+### 导航栏
+
+导航栏实现简单，引入相关入口并正确设置路由即可。
+
+### 个人主页
+
+个人主页主要包括``user``、``content``和``notification``等信息/资源，已实现的功能有：
+- 查看用户个人信息、已发博客列表和通知列表
+- 修改用户名（仅限已登录用户本人）
+- 查看博客详情
+- 删除通知（仅限已登录用户本人）
+同时，通过``localStorage``实现对当前用户的记录，以区别其他用户信息页面。
+
+### 反向代理配置
+
+第一次进行``get``请求测试时报错如下：
+![](https://cdn.jsdelivr.net/gh/sherryjw/StaticResource@master/image/sc-hw9-001.png)
+
+以往的前端项目中没有遇到类似情况，查阅许多资料，不断试错，确定了最主要的解决方案之一为设置反向代理（后续遇到的跨域请求错误为后端路由配置出错导致），主要配置如下：
+
+``angular.json``
+```json
+"serve": {
+  "builder": "@angular-devkit/build-angular:dev-server",
+  "options": {
+    "browserTarget": "project-front_end:build",
+    "proxyConfig": "proxy.config.json"
+  }
+}
+```
+
+``package.json``
+```json
+"scripts": {
+  "ng": "ng",
+  "start": "ng serve --proxy-config proxy.config.json --host 0.0.0.0",
+  "build": "ng build",
+  "test": "ng test",
+  "lint": "ng lint",
+  "e2e": "ng e2e"
+}
+```
+
+``proxy.config.json``
+```json
+{
+  "/api/*": {
+    "target": "http://47.103.210.109:8080",
+    "secure": true,
+    "changeOrigin": true,
+    "cookieDomainRewrite": "",
+    "ws": true,
+    "pathRewrite": {
+      "^/": ""
+    }
+  }
+}
+```
+
+## 总结与感想
+
+&emsp;&emsp;本次项目前端之路不可不谓之坎坷曲折，从写第一个页面开始就请求数据失败，这是以往所没有遇到过的，或许是后端架构不同导致，因为前端经验比较少，碰见过这类问题也算是又学到了新方法/知识（顺便复习计算机网络）；解决了GET跨域请求问题后又接着遇到了POST请求跨域问题，这是对着无数教程配置完反向代理后的我所不能理解的，事实证明有前后端分离的地方必有分（~~甩~~）歧（~~锅~~），由于技术知识匮乏，无法判断是谁出了问题，只能在不断试错中成功发现并不是前端的问题；在原DDL的当天小组所有人都在研究``cookie``不一致的问题，因为这导致了服务器不能通过``session``来定位用户，许多的操作无法实现，没想到最后是前端一行代码解决了问题；最后一个主要问题是``token``，虽然实现思路不难，但转换为``Angular``代码难免有些为难，官方文档三言两语，网上代码质量参差不齐，前端打工人只能靠自己了！<br/>
+&emsp;&emsp;项目暂告一段落，最遗憾莫过于搭建一个UI精美的博客（指纯手工）的愿望又暂时破灭了……
