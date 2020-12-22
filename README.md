@@ -4,11 +4,11 @@
 | :-----------: | :--------: | :-----------: | :----------: |
 |   **年级**    | **2018级** |   **专业**    | **软件工程** |
 | **成员1姓名** | **孙意林** | **成员1学号** | **18342088** |
-| **成员2姓名** | **李佳**   | **成员2学号** | **18342048** |
+| **成员2姓名** |  **李佳**  | **成员2学号** | **18342048** |
 | **成员3姓名** | **孙浩男** | **成员3学号** | **18342087** |
 | **成员4姓名** |            | **成员4学号** |              |
 | **成员5姓名** |            | **成员5学号** |              |
-| **开始日期**  |            | **完成日期**  |              |
+| **开始日期**  | 2020.12.8  | **完成日期**  |  2020.12.22  |
 
 ## 项目名称
 
@@ -43,9 +43,9 @@ xx博客
 
 |  姓名  |                             工作                             |
 | :----: | :----------------------------------------------------------: |
-| 孙意林 | 构建数据库，完成数据库服务器、后端服务器的部署，完成后端底层数据库操作框架的构建与具体实现,撰写实验报告 |
-| 李佳   | 服务端架构（路由，模型）、API设计及文档撰写、User、Like模块的控制器逻辑、API root 获取简单 API 服务列表|
-| 孙浩男 | Content、Notification模块控制器逻辑，基于jwt的Token实现与验证，撰写实验报告                                                             |
+| 孙意林 | 构建数据库，完成数据库服务器、后端服务器的部署，完成后端底层数据库操作框架的构建与具体实现，Travis CI 部署，撰写实验报告 |
+|  李佳  | 服务端架构（路由，模型）、API设计及文档撰写、User、Like模块的控制器逻辑、API root 获取简单 API 服务列表 |
+| 孙浩男 | Content、Notification模块控制器逻辑，基于jwt的Token实现与验证，撰写实验报告 |
 
 ## 项目部署说明
 
@@ -104,11 +104,86 @@ xx博客
 
 #### 连接数据库
 
+连接数据库只需要使用`mgo.Dial`进行连接然后设置连接模式即可
+
+```go
+func DBservice() (*mgo.Session, error) {
+	session, err := mgo.Dial("mongodb://47.103.210.109:27017")
+	if err != nil {
+		fmt.Println(err)
+		return nil, err
+	}
+	session.SetMode(mgo.Monotonic, true)
+
+	return session, nil
+}
+```
+
+#### 设置的数据库
+
+本项目中共使用了四个数据库
+
+- 用户数据库
+
+```go
+type User struct {
+	ID           bson.ObjectId `bson:"_id"`          // 用户ID
+	Pwd          string        `bson:"password"`     //用户密码
+	Email        string        `bson:"email"`        // 用户唯一邮箱
+	Info         UserInfo      `bson:"info"`         // 用户个性信息
+	LikeCount    int64         `bson:"likeCount"`    // 被点赞数
+	ContentCount int64         `bson:"contentCount"` // 内容数量
+}
+```
+
+- 文章数据库
+
+```go
+type Content struct {
+	ID          bson.ObjectId `bson:"_id"`
+	Detail      string        `bson:"detail"`      // 详情介绍
+	OwnID       bson.ObjectId `bson:"ownId"`       // 作者ID [索引]
+	PublishDate int64         `bson:"publishDate"` // 发布日期
+	LikeNum     int64         `bson:"likeNum"`     // 点赞数
+	Public      bool          `bson:"public"`      // 是否公开
+	Tag         []string      `bson:"tag"`         // 标签
+}
+```
+
+- 点赞数据库
+
+```go
+type Like struct {
+	ID        bson.ObjectId `bson:"_id"`
+	UserID    bson.ObjectId `bson:"userId"`    // 用户ID
+	ContentID bson.ObjectId `bson:"contentId"` // 内容ID
+}
+```
+
+- 通知数据库
+
+```go
+type NotificationDetail struct {
+	ID         bson.ObjectId `bson:"_id"`
+	CreateTime int64         `bson:"time"`
+	Content    string        `bson:"content"`   // 通知内容
+	SourceID   bson.ObjectId `bson:"sourceId"`  // 源ID （点赞用户）
+	TargetID   bson.ObjectId `bson:"targetId"`  // 目标ID （被点赞用户）
+	ContentID  bson.ObjectId `bson:"contentId"` //点赞文章ID
+	Type       string        `bson:"type"`      // 类型：暂时只有like
+}
+```
+
 
 
 ### 数据库操作
 
-
+- 增加数据：`m.DB.Insert`
+- 修改数据：`m.DB.UpdateId`
+- 删除数据：`m.DB.RemoveId`
+- 查找数据
+  - 通过ID：`m.DB.FindId`
+  - 通过选择器：`m.DB.Find`
 
 ### 控制器
 >controller中实现对后端接受到不同Method和Path请求的处理，主要操作包括session验证、Token签发和验证、用户信息判断、设置请求的返回信息等。分为User、Content、Like、Notification四个模块
