@@ -153,6 +153,7 @@ GET /api/content/texts/{userID:string}
 ## 前端详细说明
 
 前端框架使用``Angular 10``，文件结构设计如下：
+
 ![](https://cdn.jsdelivr.net/gh/sherryjw/StaticResource@master/image/sc-hw9-002.png)
 
 - _service: 存放共享服务，现仅包含拦截器
