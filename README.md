@@ -66,6 +66,7 @@ XBlog
 ```bash
 > npm install --registry="https://registry.npm.vmatrix.org.cn"
 ```
+后再次运行``npm start``。
 
 ### 后端
 
