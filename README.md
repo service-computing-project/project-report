@@ -56,7 +56,12 @@ XBlog
 
 ### 前端
 
-
+```bash
+> git clone https://github.com/service-computing-project/project-front_end.git
+> cd project-front_end
+> npm install --registry="https://registry.npm.taobao.org"
+> npm start
+```
 
 ### 后端
 
