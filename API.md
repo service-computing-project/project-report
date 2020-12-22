@@ -359,9 +359,6 @@ GET /api/content/public
 | page     | number | 页码   |
 | per_page | number | 页大小 |
 
-##### Example
-
-
 #### Response
 
 > Status: 200 OK
@@ -436,9 +433,6 @@ GET /api/content/texts/{userID:string}
 | -------- | ------ | ------ |
 | page     | number | 页码   |
 | per_page | number | 页大小 |
-
-##### Example
-
 
 #### Response
 
@@ -682,15 +676,6 @@ PATCH /api/like/{contentID}
 ```
 GET /api/notification/all
 ```
-
-#### Parameters
-
-| 字段     | 类型   | 描述   |
-| -------- | ------ | ------ |
-| page     | number | 页码   |
-| per_page | number | 页大小 |
-
-##### Example
 
 #### Response
 
