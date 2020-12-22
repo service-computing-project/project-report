@@ -92,6 +92,54 @@ xx博客
 
 更详细的设计方案详见[API文档](./API.md)
 
+### API实例：获取指定用户的所有内容
+
+```
+GET /api/content/texts/{userID:string}
+```
+
+* userID string 用户id(user_id="self"时，获取自身信息)
+
+#### Parameters
+
+| 字段     | 类型   | 描述   |
+| -------- | ------ | ------ |
+| page     | number | 页码   |
+| per_page | number | 页大小 |
+
+#### Response
+
+> Status: 200 OK
+>
+> Location: /api/content/texts/5c3774187a2bdd000111e10c?page=1&per_page=1
+
+| 参数名      | 类型   | 描述          |
+| ----------- | ------ | ------------- |
+| State       | string | 状态          |
+| Data        | array  | 内容信息数组  |
+
+* 参数使用json形式解析
+
+##### Example
+```json
+{
+ "State": "success",
+ "Data": [
+  {
+   "ID": "5b35115a7a2bdd4aac29eb74",
+   "Detail": "test内容",
+   "OwnID": "5b3510fe7a2bdd4aac29eb73",
+   "PublishDate": 1530204506000,
+   "LikeNum": 2,
+   "Public": true,
+   "Tag": [
+    "说明"
+   ]
+  }
+ ]
+}
+```
+
 ## 前端详细说明
 
 
