@@ -454,7 +454,6 @@ GET /api/content/texts/{userID:string}
  "Data": [
   {
    "ID": "5b35115a7a2bdd4aac29eb74",
-   "Name": "我是一个测试账户",
    "Detail": "test内容",
    "OwnID": "5b3510fe7a2bdd4aac29eb73",
    "PublishDate": 1530204506000,
