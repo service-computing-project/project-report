@@ -18,6 +18,11 @@ XBlog
 
 ### 前端
 
+操作系统：Win10
+
+前端框架：Angular 10
+
+组件库：Ant Design
 
 
 ### 后端
