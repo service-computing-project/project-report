@@ -459,7 +459,6 @@ GET /api/content/texts/{userID:string}
    "OwnID": "5b3510fe7a2bdd4aac29eb73",
    "PublishDate": 1530204506000,
    "LikeNum": 2,
-   "CommentNum": 1,
    "Public": true,
    "Tag": [
     "说明"
